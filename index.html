@@ -11,26 +11,26 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #f5f5f5;
-      color: #444;
+      background-color: #f0f0f0;
+      color: #333;
     }
   </style>
   <script>
     const targetUrl = "https://laughing-spoon-5g5wxg5xwg5whvvr4-8006.app.github.dev/";
 
-    // Try a HEAD request to see if the URL is up
-    fetch(targetUrl, { method: "HEAD", mode: "no-cors" })
-      .then(() => {
-        window.location.href = targetUrl;
-      })
-      .catch(() => {
-        window.location.href = "index2.html";
-      });
+    // Create a HEAD request with a timeout
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000); // 3s timeout
 
-    // Extra fallback after 5 seconds
-    setTimeout(() => {
+    fetch(targetUrl, {
+      method: "HEAD",
+      mode: "no-cors",
+      signal: controller.signal
+    }).then(() => {
+      window.location.href = targetUrl;
+    }).catch(() => {
       window.location.href = "index2.html";
-    }, 5000);
+    });
   </script>
 </head>
 <body>
