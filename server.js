@@ -1,28 +1,34 @@
-const express = require('express');
-const fetch = require('node-fetch');
+import express from 'express';
+import fetch from 'node-fetch';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-const TARGET_URL = 'https://laughing-spoon-5g5wxg5xwg5whvvr4-8006.app.github.dev/';
-const FALLBACK_URL = '/index2.html';
+// __dirname replacement in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(express.static(__dirname)); // Serve index2.html
+// Serve static files
+app.use(express.static(__dirname));
+
+// Define target URL
+const targetUrl = 'https://cmxbcqguzbnu.eu-central-1.clawcloudrun.com/';
 
 app.get('/', async (req, res) => {
   try {
-    const response = await fetch(TARGET_URL, { timeout: 3000 });
+    const response = await fetch(targetUrl, { method: 'HEAD' });
     if (response.ok) {
-      return res.redirect(302, TARGET_URL);
+      res.redirect(targetUrl);
     } else {
-      console.log(`[WARN] Target responded with ${response.status}`);
+      res.sendFile(path.join(__dirname, 'index2.html'));
     }
   } catch (err) {
-    console.log(`[ERROR] Failed to fetch target: ${err.message}`);
+    res.sendFile(path.join(__dirname, 'index2.html'));
   }
-
-  res.redirect(302, FALLBACK_URL);
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Redirect server running at http://localhost:${port}`);
+  console.log(`Redirect server running at http://localhost:${port}`);
 });
