@@ -3,24 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=https://laughing-spoon-5g5wxg5xwg5whvvr4-8006.app.github.dev/">
-  <script>
-    // Fallback to index2.html after 5 seconds if redirect fails
-    setTimeout(() => {
-      window.location.href = 'index2.html';
-    }, 5000);
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="5; url=index2.html">
-    <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        padding-top: 50px;
-      }
-    </style>
-    <p>JavaScript is disabled. If you are not redirected, <a href="index2.html">click here</a>.</p>
-  </noscript>
   <style>
     body {
       font-family: sans-serif;
@@ -29,10 +11,27 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #fafafa;
-      color: #555;
+      background-color: #f5f5f5;
+      color: #444;
     }
   </style>
+  <script>
+    const targetUrl = "https://laughing-spoon-5g5wxg5xwg5whvvr4-8006.app.github.dev/";
+
+    // Try a HEAD request to see if the URL is up
+    fetch(targetUrl, { method: "HEAD", mode: "no-cors" })
+      .then(() => {
+        window.location.href = targetUrl;
+      })
+      .catch(() => {
+        window.location.href = "index2.html";
+      });
+
+    // Extra fallback after 5 seconds
+    setTimeout(() => {
+      window.location.href = "index2.html";
+    }, 5000);
+  </script>
 </head>
 <body>
   Redirecting, please wait...
