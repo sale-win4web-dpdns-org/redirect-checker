@@ -1,46 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        function checkRedirect() {
-            // The URL to redirect to
-            const targetUrl = 'https://laughing-spoon-5g5wxg5xwg5whvvr4.github.dev/';
-            
-            // Try to redirect after a short delay
-            setTimeout(function () {
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', targetUrl, true);
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        window.location.href = targetUrl;
-                    } else {
-                        showError();
-                    }
-                };
-                xhr.onerror = function () {
-                    showError();
-                };
-                xhr.send();
-            }, 1000); // Wait 1 second before trying to redirect
-        }
-
-        function showError() {
-            // Display error message and redirect to index2.html
-            document.body.innerHTML = "<h1>The web service is down. Redirecting to fallback page...</h1>";
-            setTimeout(function() {
-                window.location.href = 'index2.html';
-            }, 2000); // Wait 2 seconds before redirecting to index2.html
-        }
-
-        // Call the checkRedirect function when the page loads
-        window.onload = checkRedirect;
-    </script>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta http-equiv="refresh" content="0;url=https://laughing-spoon-5g5wxg5xwg5whvvr4-8006.app.github.dev/">
+  <script>
+    // Fallback to index2.html after 5 seconds if redirect fails
+    setTimeout(() => {
+      window.location.href = 'index2.html';
+    }, 5000);
+  </script>
+  <style>
+    body { display: none; }
+  </style>
 </head>
-<body>
-    <h1>Redirecting...</h1>
-    <p>If you are not redirected automatically, please wait...</p>
-</body>
+<body></body>
 </html>
